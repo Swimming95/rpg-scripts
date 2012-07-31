@@ -1,10 +1,10 @@
 /* Just initializing some structures*/
-pokedex=new Array(649);
+pokedex=new Array(650);
 
 
 ExpGrowthChart=new Array(6);
 for (var i=0;i<6;i++){
-	ExpGrowthChart[i]=new Array(100);
+	ExpGrowthChart[i]=new Array(101);
 }
 var line,i
 
@@ -12,7 +12,7 @@ var line,i
 var allGrowthExp=sys.getFileContent("data/experience.csv").split("\n");
 for (i=1;i<allGrowthExp.length){
 	line=allGrowthExp[i].split(",");
-	ExpGrowthChart[line[0]][line[1]-1]=line[2];
+	ExpGrowthChart[line[0]][line[1]]=line[2];
 }
 
 /*pokeID,base happiness*/
@@ -22,6 +22,10 @@ for(i=1;i<allBaseHappiness.length;i++){
 	pokedex[line[0]].baseHappiness=line[1];
 }
 
+pokedex.prototype.getBaseHappiness(pokemonid){
+	return pokedex[pokemonid].baseHappiness;
+}
+
 /*pokeID,growth type */
 var allGrowthRates=sys.getFileContent("data/pokemon_growth_rate.csv").split("\n");
 for(i=1;i<allGrowthRates.length;i++){
@@ -29,6 +33,13 @@ for(i=1;i<allGrowthRates.length;i++){
 	pokedex[line[0]].growthRate=line[1];
 }
 
+pokedex.prototype.getGrowthRate(pokemonid){
+	return pokedex[pokemonid].growthRate;
+}
+
+pokedex.prototype.getExpForLevel(pokemonid,level){
+	return allGrowthExp[pokedex.getGrowthRate(pokemonid)][level]
+}
 
 /*
 NEEDS TO BE RECONCILED WITH THE CORRECT POKEMON IDs
@@ -44,6 +55,17 @@ for(i=1;i<allLevelMoves.length;i++){
 		pokedex[line[0]].levelupmoves[line[2]]=[]
 	}
 	pokedex[line[0]].levelupmoves[line[2]].push(line[1]);
+}
+
+pokedex.prototype.getLevelMoves(pokemonid,level){
+	return pokedex[pokemonid].levelupmoves[level];
+}
+
+pokedex.prototype.getAllLevelMoves(pokemonid,level){
+	var moveSet=[]
+	for(var i=1;i<=level;i++){
+		moveSet.push(pokedex[pokemonid].levelupmoves[i]);
+	}
 }
 
 /*pokeID,base Exp,HP,Atk,Def,Sp.Atk,Sp.Def,Spd,Form*/
@@ -64,6 +86,13 @@ for(i=1;i<allValuesGiven;i++){
 	}
 }
 
+pokedex.prototype.getBaseExp(pokemonid){
+	return pokedex[pokemonid].baseExp;
+}
+
+pokedex.prototype.getEvs(pokemonid){
+	return pokedex[pokemonid].evs;
+}
 
 /*
 EVOLUTION DATA TO BE ADDED
