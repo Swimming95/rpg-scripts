@@ -1,10 +1,10 @@
 /* Just initializing some structures*/
-pokedex=new Array(650);
+pokedex=[];
 
 
-ExpGrowthChart=new Array(6);
+ExpGrowthChart=[];
 for (var i=0;i<6;i++){
-	ExpGrowthChart[i]=new Array(101);
+	ExpGrowthChart[i]=[];
 }
 var line,i
 
@@ -22,7 +22,7 @@ for(i=1;i<allBaseHappiness.length;i++){
 	pokedex[line[0]].baseHappiness=line[1];
 }
 
-pokedex.prototype.getBaseHappiness(pokemonid){
+var baseHappiness=function(pokemonid){
 	return pokedex[pokemonid].baseHappiness;
 }
 
@@ -33,11 +33,11 @@ for(i=1;i<allGrowthRates.length;i++){
 	pokedex[line[0]].growthRate=line[1];
 }
 
-pokedex.prototype.getGrowthRate(pokemonid){
+var growthRate=function(pokemonid){
 	return pokedex[pokemonid].growthRate;
 }
 
-pokedex.prototype.getExpForLevel(pokemonid,level){
+var expForLevel=function(pokemonid,level){
 	return allGrowthExp[pokedex.getGrowthRate(pokemonid)][level]
 }
 
@@ -49,7 +49,7 @@ var allLevelMoves=sys.getFileContent("data/pokemon_level_moves.csv").split("\n")
 for(i=1;i<allLevelMoves.length;i++){
 	line=allLevelMoves.split(",");
 	if(pokedex[line[0]].levelupmoves==undefined){
-		pokedex[line[0]].levelupmoves=new Array(100);
+		pokedex[line[0]].levelupmoves=[];
 	}
 	if(pokedex[line[0]].levelupmoves[line[2]]==undefined){
 		pokedex[line[0]].levelupmoves[line[2]]=[]
@@ -57,15 +57,12 @@ for(i=1;i<allLevelMoves.length;i++){
 	pokedex[line[0]].levelupmoves[line[2]].push(line[1]);
 }
 
-pokedex.prototype.getLevelMoves(pokemonid,level){
+var levelMoves=function(pokemonid,level){
 	return pokedex[pokemonid].levelupmoves[level];
 }
 
-pokedex.prototype.getAllLevelMoves(pokemonid,level){
-	var moveSet=[]
-	for(var i=1;i<=level;i++){
-		moveSet.push(pokedex[pokemonid].levelupmoves[i]);
-	}
+var allLevelMoves = function(pokemonid,level){
+	return pokedex[poke].levelupmoves.reduce(function(a,b) {return [].concat(a,b);})
 }
 
 /*pokeID,base Exp,HP,Atk,Def,Sp.Atk,Sp.Def,Spd,Form*/
@@ -86,11 +83,11 @@ for(i=1;i<allValuesGiven;i++){
 	}
 }
 
-pokedex.prototype.getBaseExp(pokemonid){
+var baseExp(pokemonid){
 	return pokedex[pokemonid].baseExp;
 }
 
-pokedex.prototype.getEvs(pokemonid){
+var evs =function (pokemonid){
 	return pokedex[pokemonid].evs;
 }
 
