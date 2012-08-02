@@ -95,11 +95,12 @@ var evs =function (pokemonid){
 EVOLUTION DATA TO BE ADDED
 */
 
-
-pokedex.baseExp=baseExp
-pokedex.evs=evs
-pokedex.levelMoves=levelMoves
-pokedex.allLevelMoves=allLevelMoves
-pokedex.expForLevel=expForLevel
-pokedex.growthRate=growthRate
-pokedex.baseHappiness=baseHappiness
+ret=({
+	baseExp=baseExp
+	evs=evs
+	levelMoves=levelMoves
+	allLevelMoves=allLevelMoves
+	expForLevel=expForLevel
+	growthRate=growthRate
+	baseHappiness=baseHappiness
+})
