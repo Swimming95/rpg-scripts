@@ -1,8 +1,8 @@
 /* Just initializing some structures*/
-pokedex=[];
+pokedex={};
 
 
-ExpGrowthChart=[];
+ExpGrowthChart={};
 for (var i=0;i<6;i++){
 	ExpGrowthChart[i]=[];
 }
@@ -96,19 +96,10 @@ EVOLUTION DATA TO BE ADDED
 */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+pokedex.baseExp=baseExp
+pokedex.evs=evs
+pokedex.levelMoves=levelMoves
+pokedex.allLevelMoves=allLevelMoves
+pokedex.expForLevel=expForLevel
+pokedex.growthRate=growthRate
+pokedex.baseHappiness=baseHappiness
